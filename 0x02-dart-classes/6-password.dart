@@ -1,40 +1,27 @@
 class Password {
-  String _password;
+  String _password; // Private property
 
+  // Constructor to initialize the password
   Password({required String password}) : _password = password;
 
-  bool isValid() {
-    if (_password.length < 8 || _password.length > 16) {
-      return false;
-    }
-
-    if (!_containsUppercase() || !_containsLowercase() || !_containsNumbers()) {
-      return false;
-    }
-
-    return true;
-  }
-
-  bool _containsUppercase() {
-    return _password.contains(RegExp(r'[A-Z]'));
-  }
-
-  bool _containsLowercase() {
-    return _password.contains(RegExp(r'[a-z]'));
-  }
-
-  bool _containsNumbers() {
-    return _password.contains(RegExp(r'[0-9]'));
-  }
-
+  // Getter for the password
   String get password => _password;
 
-  set password(String value) {
-    _password = value;
+  // Setter for the password to allow updating the value
+  set password(String newPassword) {
+    _password = newPassword;
   }
 
-  @override
-  String toString() {
-    return "Your Password is: $_password";
+  // Method to validate the password
+  bool isValid() {
+    // Check password length and ensure it contains uppercase, lowercase, and numbers
+    return (_password.length >= 8 && _password.length <= 16) &&
+           _password.contains(RegExp(r'[A-Z]')) &&
+           _password.contains(RegExp(r'[a-z]')) &&
+           _password.contains(RegExp(r'[0-9]'));
   }
+
+  // Override the toString method for a custom message
+  @override
+  String toString() => "Your Password is: $_password";
 }
