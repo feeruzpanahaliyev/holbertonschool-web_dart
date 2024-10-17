@@ -1,5 +1,5 @@
 class Password {
-  // Making the password property private
+  // Private password property
   String _password;
 
   // Constructor that initializes the private password property
@@ -10,12 +10,23 @@ class Password {
     // Check if password length is between 8 and 16 characters
     if (_password.length < 8 || _password.length > 16) return false;
 
-    // Check for at least one uppercase letter, one lowercase letter, and one number
-    bool hasUppercase = _password.contains(RegExp(r'[A-Z]'));
-    bool hasLowercase = _password.contains(RegExp(r'[a-z]'));
-    bool hasNumber = _password.contains(RegExp(r'[0-9]'));
+    // Initialize flags for character type checks
+    bool hasUppercase = false;
+    bool hasLowercase = false;
+    bool hasNumber = false;
 
-    // Return true if all conditions are met
+    // Loop through each character in the password to check for types
+    for (var char in _password.split('')) {
+      if (char.contains(RegExp(r'[A-Z]'))) {
+        hasUppercase = true;
+      } else if (char.contains(RegExp(r'[a-z]'))) {
+        hasLowercase = true;
+      } else if (char.contains(RegExp(r'[0-9]'))) {
+        hasNumber = true;
+      }
+    }
+
+    // Return true only if all conditions are met
     return hasUppercase && hasLowercase && hasNumber;
   }
 
