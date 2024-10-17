@@ -1,56 +1,48 @@
 import '6-password.dart';
 
 class User extends Password {
-  int id;
-  String name;
-  int age;
-  double height;
+  String? name;
+  int? age;
+  double? height;
+  int? id;
+  String user_password = '';
 
-  // New property to hold the user password
-  String user_password;
-
-  // Constructor to initialize the User
-  User({
-    required this.id,
-    required this.name,
-    required this.age,
-    required this.height,
-    required this.user_password,
-  }) : super(password: user_password) {
-    // Update the password in the superclass
-    password = user_password;
+  User(
+      {id = int,
+      name = String,
+      age = int,
+      height = double,
+      user_password = String})
+      : super(password: user_password) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+    this.height = height;
+    this.user_password = user_password;
   }
 
-  // Override the setter for user_password to also update the superclass
-  set user_password(String newPassword) {
-    password = newPassword; // Update the password in the Password superclass
+  static User fromJson(Map<dynamic, dynamic> userJson) {
+    return User(
+        id: userJson['id'],
+        name: userJson['name'],
+        age: userJson['age'],
+        height: userJson['height'],
+        user_password: '');
   }
 
-  // Convert User to JSON
-  Map<String, dynamic> toJson() {
+  Map toJson() {
     return {
-      'id': id,
-      'name': name,
-      'age': age,
-      'height': height,
-      'user_password': user_password,
+      'id': this.id,
+      'name': this.name,
+      'age': this.age,
+      'height': this.height
     };
   }
 
-  // Static method to create a User instance from JSON
-  static User fromJson(Map<dynamic, dynamic> userJson) {
-    return User(
-      id: userJson['id'] ?? 0, // Default value if null
-      name: userJson['name'] ?? '', // Default value if null
-      age: userJson['age'] ?? 0, // Default value if null
-      height: userJson['height']?.toDouble() ?? 0.0, // Default value if null
-      user_password: userJson['user_password'] ?? '', // Default value if null
-    );
-  }
-
-  // Override toString method to include password validity
   @override
   String toString() {
-    return "User(id: $id, name: $name, age: $age, height: $height, Password: ${isValid()})";
+    final pass = new Password(password: this.user_password);
+
+    return 'User(id : ${this.id} ,name: ${this.name}, age: ${this.age}, height: ${this.height}, Password: ${pass.isValid()})';
   }
 }
