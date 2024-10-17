@@ -1,27 +1,33 @@
 class Password {
-  String _password; // Private property
+  String _password = '';
 
-  // Constructor to initialize the password
-  Password({required String password}) : _password = password;
-
-  // Getter for the password
-  String get password => _password;
-
-  // Setter for the password to allow updating the value
-  set password(String newPassword) {
-    _password = newPassword;
+  Password({password = String}) {
+    this._password = password;
   }
 
-  // Method to validate the password
+  String get password {
+    return this._password;
+  }
+
+  void set password(String password) {
+    this._password = password;
+  }
+
   bool isValid() {
-    // Check password length and ensure it contains uppercase, lowercase, and numbers
-    return (_password.length >= 8 && _password.length <= 16) &&
-           _password.contains(new RegExp(r'[A-Z]')) &&
-           _password.contains(new RegExp(r'[a-z]')) &&
-           _password.contains(new RegExp(r'[0-9]'));
+    if (this._password.length >= 8 && this._password.length <= 16) {
+      if (this._password.contains(RegExp(r'[A-Z]')) &&
+          this._password.contains(RegExp(r'[a-z]'))) {
+        if (this._password.contains(RegExp(r'[0-9]'))) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
-  // Override the toString method for a custom message
   @override
-  String toString() => "Your Password is: $_password";
+  String toString() {
+    return 'Your Password is: ${this._password}';
+  }
 }
