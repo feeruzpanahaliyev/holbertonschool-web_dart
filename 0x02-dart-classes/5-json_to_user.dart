@@ -1,8 +1,8 @@
 class User {
-  int id;          // New property for User ID
-  String name;
-  int age;
-  double height;
+  String? name;
+  int? age;
+  double? height;
+  int? id;
 
   // Constructor to initialize all properties
   User({
