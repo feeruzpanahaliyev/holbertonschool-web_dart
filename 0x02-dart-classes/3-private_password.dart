@@ -7,24 +7,13 @@ class Password {
 
   // Method to validate the password according to given conditions
   bool isValid() {
-    // Check if password length is between 8 and 16 characters
+    // Check if the password length is between 8 and 16 characters
     if (_password.length < 8 || _password.length > 16) return false;
 
-    // Initialize flags for character type checks
-    bool hasUppercase = false;
-    bool hasLowercase = false;
-    bool hasNumber = false;
-
-    // Loop through each character in the password to check for types
-    for (var char in _password.split('')) {
-      if (char.contains(RegExp(r'[A-Z]'))) {
-        hasUppercase = true;
-      } else if (char.contains(RegExp(r'[a-z]'))) {
-        hasLowercase = true;
-      } else if (char.contains(RegExp(r'[0-9]'))) {
-        hasNumber = true;
-      }
-    }
+    // Check for uppercase, lowercase, and numeric characters
+    bool hasUppercase = _password.contains(RegExp(r'[A-Z]'));
+    bool hasLowercase = _password.contains(RegExp(r'[a-z]'));
+    bool hasNumber = _password.contains(RegExp(r'[0-9]'));
 
     // Return true only if all conditions are met
     return hasUppercase && hasLowercase && hasNumber;
