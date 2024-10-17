@@ -5,6 +5,8 @@ class Password {
   // Constructor that initializes the private password property
   Password({required String password}) : _password = password;
 
+  String get password => _password;
+
   // Method to validate the password according to given conditions
   bool isValid() {
     // Check if the password length is between 8 and 16 characters
