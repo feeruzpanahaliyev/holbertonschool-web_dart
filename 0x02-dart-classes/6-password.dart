@@ -16,15 +16,15 @@ class Password {
   }
 
   bool _containsUppercase() {
-    return _password.contains(RegExp(r'[A-Z]'));
+    return _password.contains(new RegExp(r'[A-Z]'));
   }
 
   bool _containsLowercase() {
-    return _password.contains(RegExp(r'[a-z]'));
+    return _password.contains(new RegExp(r'[a-z]'));
   }
 
   bool _containsNumbers() {
-    return _password.contains(RegExp(r'[0-9]'));
+    return _password.contains(new RegExp(r'[0-9]'));
   }
 
   String get password => _password;
